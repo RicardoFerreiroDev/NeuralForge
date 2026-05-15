@@ -1,0 +1,17 @@
+{
+  "name": "NeuralForge Daily",
+  "short_name": "NeuralForge",
+  "description": "Entrenamiento diario avanzado de IA, deep learning y matemáticas.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

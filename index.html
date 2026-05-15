@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuralForge Daily</title>
+  <meta name="description" content="Entrenamiento diario avanzado de IA, deep learning y matemáticas." />
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI mastery tracker</p>
+        <h1>NeuralForge Daily</h1>
+      </div>
+      <div class="streak-card">
+        <span id="streak">0</span>
+        <small>días de racha</small>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Secciones principales">
+      <button class="tab active" data-view="daily">Test diario</button>
+      <button class="tab" data-view="learn">Banco</button>
+      <button class="tab" data-view="errors">Errores</button>
+      <button class="tab" data-view="stats">Progreso</button>
+    </nav>
+
+    <main>
+      <section id="daily" class="view active">
+        <div class="hero-card">
+          <div>
+            <p class="eyebrow">Sesión de hoy</p>
+            <h2>Responde sin mirar, corrige con checklist y guarda tu nota.</h2>
+          </div>
+          <button id="startSession" class="primary">Empezar sesión</button>
+        </div>
+
+        <section id="questionPanel" class="question-card hidden">
+          <div class="question-meta">
+            <span id="questionTopic"></span>
+            <span id="questionDifficulty"></span>
+            <span id="questionType"></span>
+          </div>
+
+          <h2 id="questionText"></h2>
+
+          <label for="userAnswer" class="label">Tu respuesta</label>
+          <textarea id="userAnswer" rows="8" placeholder="Escribe tu respuesta antes de mirar la corrección..."></textarea>
+
+          <div class="actions">
+            <button id="showCorrection" class="primary">Ver corrección</button>
+            <button id="skipQuestion" class="secondary">Saltar</button>
+          </div>
+
+          <div id="correctionPanel" class="correction hidden">
+            <h3>Respuesta esperada</h3>
+            <ul id="expectedAnswer"></ul>
+
+            <h3>Checklist</h3>
+            <div id="checklist"></div>
+
+            <div class="score-box">
+              <div>
+                <p class="eyebrow">Nota sugerida</p>
+                <strong id="suggestedScore">—</strong>
+              </div>
+              <p id="scoreComment">Marca los puntos cubiertos para calcular una nota.</p>
+            </div>
+
+            <h3>Rúbrica</h3>
+            <div id="rubric"></div>
+
+            <h3>Autoevaluación final</h3>
+            <div class="score-buttons" id="scoreButtons">
+              <button data-score="0">0</button>
+              <button data-score="1">1</button>
+              <button data-score="2">2</button>
+              <button data-score="3">3</button>
+              <button data-score="4">4</button>
+              <button data-score="5">5</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="learn" class="view">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Tu banco de preguntas</p>
+            <h2>Preguntas disponibles</h2>
+          </div>
+          <input id="searchQuestions" type="search" placeholder="Buscar tema, tag o texto..." />
+        </div>
+        <div id="questionList" class="grid-list"></div>
+      </section>
+
+      <section id="errors" class="view">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Reparar fallos</p>
+            <h2>Preguntas con nota baja</h2>
+          </div>
+        </div>
+        <div id="errorList" class="grid-list"></div>
+      </section>
+
+      <section id="stats" class="view">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Seguimiento local</p>
+            <h2>Progreso</h2>
+          </div>
+          <button id="exportProgress" class="secondary">Exportar progreso</button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span id="totalAnswered">0</span>
+            <small>respuestas guardadas</small>
+          </article>
+          <article class="stat-card">
+            <span id="avgScore">—</span>
+            <small>nota media</small>
+          </article>
+          <article class="stat-card">
+            <span id="weakTopics">—</span>
+            <small>tema más débil</small>
+          </article>
+        </div>
+
+        <div id="topicStats" class="topic-stats"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

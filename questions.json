@@ -1,0 +1,352 @@
+[
+  {
+    "id": "opt-001",
+    "topic": "Optimization",
+    "difficulty": 8,
+    "type": "theory",
+    "question": "Explica por qué AdamW no es equivalente a aplicar regularización L2 dentro del gradiente en Adam.",
+    "expected_answer": [
+      "Adam usa estimaciones adaptativas del primer y segundo momento del gradiente.",
+      "Con L2 regularization, el término de penalización se suma al gradiente antes del precondicionamiento adaptativo.",
+      "Ese término queda escalado por la estimación del segundo momento, por lo que el efecto de regularización depende de la historia de gradientes.",
+      "AdamW desacopla el weight decay y lo aplica directamente sobre los parámetros.",
+      "Por eso AdamW recupera una dinámica de decaimiento de pesos más parecida a la intención original del weight decay."
+    ],
+    "checklist": [
+      {
+        "label": "Distingue L2 regularization de decoupled weight decay",
+        "weight": 2
+      },
+      {
+        "label": "Menciona el precondicionamiento adaptativo de Adam",
+        "weight": 2
+      },
+      {
+        "label": "Explica que L2 entra dentro del gradiente",
+        "weight": 1
+      },
+      {
+        "label": "Explica que AdamW aplica decay directamente a los parámetros",
+        "weight": 1
+      },
+      {
+        "label": "Conecta la diferencia con la dinámica de entrenamiento",
+        "weight": 1
+      }
+    ],
+    "rubric": {
+      "5": "Explicación formal, con ecuaciones o dinámica de actualización, y distinción clara entre L2 y AdamW.",
+      "4": "Explicación correcta con intuición matemática, aunque con pocas ecuaciones.",
+      "3": "Entiende la diferencia principal, pero no explica bien el papel del precondicionamiento adaptativo.",
+      "2": "Respuesta parcial que mezcla weight decay y L2 sin precisión.",
+      "1": "Menciona AdamW o regularización, pero sin explicar la diferencia.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "adam",
+      "adamw",
+      "weight decay",
+      "regularization"
+    ]
+  },
+  {
+    "id": "tr-001",
+    "topic": "Transformers",
+    "difficulty": 9,
+    "type": "analysis",
+    "question": "Analiza qué propiedades se pierden o se modifican al sustituir softmax attention por una atención lineal kernelizada.",
+    "expected_answer": [
+      "La atención lineal busca reducir la complejidad cuadrática de la atención estándar.",
+      "Softmax attention produce pesos normalizados con interpretación probabilística clara.",
+      "Las aproximaciones kernelizadas pueden tener menor capacidad para concentrar masa en pocos tokens.",
+      "La expresividad depende fuertemente del kernel o feature map elegido.",
+      "Pueden aparecer problemas de estabilidad numérica, acumulación de errores o sesgos inductivos no deseados."
+    ],
+    "checklist": [
+      {
+        "label": "Compara complejidad O(n²) y O(n)",
+        "weight": 1
+      },
+      {
+        "label": "Explica la interpretación probabilística de softmax",
+        "weight": 1
+      },
+      {
+        "label": "Menciona la capacidad de concentrar masa de atención",
+        "weight": 2
+      },
+      {
+        "label": "Discute el papel del kernel o feature map",
+        "weight": 2
+      },
+      {
+        "label": "Incluye limitaciones de estabilidad o expresividad",
+        "weight": 1
+      }
+    ],
+    "rubric": {
+      "5": "Análisis profundo con complejidad, normalización, expresividad, estabilidad y casos de fallo.",
+      "4": "Buena comparación, con alguna limitación menor ausente.",
+      "3": "Respuesta correcta pero superficial.",
+      "2": "Solo menciona eficiencia sin analizar pérdidas conceptuales.",
+      "1": "Reconoce que hay una aproximación, pero no la caracteriza.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "attention",
+      "linear attention",
+      "kernels",
+      "sequence length"
+    ]
+  },
+  {
+    "id": "vae-001",
+    "topic": "Variational Inference",
+    "difficulty": 8,
+    "type": "derivation",
+    "question": "Deriva la ELBO para un VAE partiendo de log p(x) y explica cuándo la cota es tight.",
+    "expected_answer": [
+      "Se introduce una distribución variacional q(z|x).",
+      "Se reescribe log p(x) usando una esperanza bajo q(z|x).",
+      "Se aplica Jensen para obtener una cota inferior.",
+      "La ELBO contiene un término de reconstrucción y un término KL.",
+      "La cota es tight cuando q(z|x) coincide con el posterior verdadero p(z|x)."
+    ],
+    "checklist": [
+      {
+        "label": "Introduce q(z|x) correctamente",
+        "weight": 1
+      },
+      {
+        "label": "Parte de log p(x)",
+        "weight": 1
+      },
+      {
+        "label": "Aplica Jensen de forma justificada",
+        "weight": 2
+      },
+      {
+        "label": "Identifica reconstrucción y KL",
+        "weight": 2
+      },
+      {
+        "label": "Explica cuándo la cota es tight",
+        "weight": 1
+      }
+    ],
+    "rubric": {
+      "5": "Derivación completa, rigurosa e interpretada.",
+      "4": "Derivación correcta con algún detalle menor ausente.",
+      "3": "Idea principal correcta, pero falta rigor en Jensen o la descomposición.",
+      "2": "Conoce la forma final de la ELBO pero no la deriva bien.",
+      "1": "Menciona KL o reconstrucción sin conexión clara.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "elbo",
+      "vae",
+      "kl",
+      "jensen"
+    ]
+  },
+  {
+    "id": "math-001",
+    "topic": "Linear Algebra",
+    "difficulty": 7,
+    "type": "conceptual",
+    "question": "Explica por qué los autovalores de una matriz Hessiana alrededor de un mínimo local informan sobre la curvatura y la estabilidad de la optimización.",
+    "expected_answer": [
+      "La Hessiana describe la curvatura local de segundo orden de la función objetivo.",
+      "Los autovalores indican curvatura en las direcciones de los autovectores.",
+      "Autovalores grandes implican direcciones de alta curvatura y posible sensibilidad al learning rate.",
+      "Autovalores pequeños o cercanos a cero indican valles planos o direcciones mal condicionadas.",
+      "Autovalores negativos indican que no se está en un mínimo local estricto."
+    ],
+    "checklist": [
+      {
+        "label": "Relaciona Hessiana con aproximación de segundo orden",
+        "weight": 1
+      },
+      {
+        "label": "Interpreta autovalores como curvatura direccional",
+        "weight": 2
+      },
+      {
+        "label": "Menciona condicionamiento",
+        "weight": 1
+      },
+      {
+        "label": "Conecta curvatura con estabilidad del learning rate",
+        "weight": 1
+      },
+      {
+        "label": "Distingue mínimos, sillas y direcciones planas",
+        "weight": 2
+      }
+    ],
+    "rubric": {
+      "5": "Explicación completa con interpretación geométrica y consecuencias para optimización.",
+      "4": "Respuesta correcta con buena intuición.",
+      "3": "Correcta pero incompleta.",
+      "2": "Menciona Hessiana y curvatura sin conectar con optimización.",
+      "1": "Respuesta vaga.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "hessian",
+      "eigenvalues",
+      "optimization",
+      "curvature"
+    ]
+  },
+  {
+    "id": "diff-001",
+    "topic": "Diffusion Models",
+    "difficulty": 9,
+    "type": "theory",
+    "question": "Explica la relación entre denoising score matching y modelos de difusión generativos.",
+    "expected_answer": [
+      "Los modelos de difusión aprenden a invertir un proceso gradual de ruido.",
+      "El score es el gradiente de la log densidad respecto a la entrada.",
+      "Denoising score matching permite estimar scores perturbando datos con ruido.",
+      "La red aprende una dirección de denoising relacionada con el score de la distribución ruidosa.",
+      "El muestreo usa esa información para transformar ruido en datos mediante una dinámica inversa."
+    ],
+    "checklist": [
+      {
+        "label": "Define score como gradiente de log densidad",
+        "weight": 2
+      },
+      {
+        "label": "Explica el proceso directo de ruido",
+        "weight": 1
+      },
+      {
+        "label": "Conecta denoising con estimación del score",
+        "weight": 2
+      },
+      {
+        "label": "Explica el proceso inverso de generación",
+        "weight": 1
+      },
+      {
+        "label": "Menciona dependencia del nivel de ruido o tiempo",
+        "weight": 1
+      }
+    ],
+    "rubric": {
+      "5": "Conexión rigurosa entre score, denoising, ruido temporal y generación inversa.",
+      "4": "Buena explicación con pocos detalles técnicos ausentes.",
+      "3": "Entiende la intuición, pero falta precisión matemática.",
+      "2": "Describe difusión sin explicar score matching.",
+      "1": "Respuesta muy superficial.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "diffusion",
+      "score matching",
+      "denoising",
+      "generative models"
+    ]
+  },
+  {
+    "id": "rl-001",
+    "topic": "Reinforcement Learning",
+    "difficulty": 8,
+    "type": "comparison",
+    "question": "Compara policy gradient y Q-learning en términos de objetivo optimizado, estabilidad, sesgo-varianza y aplicabilidad a espacios de acción continuos.",
+    "expected_answer": [
+      "Policy gradient optimiza directamente una política parametrizada.",
+      "Q-learning aprende una función de valor-acción y deriva la política a partir de ella.",
+      "Policy gradient suele manejar mejor acciones continuas.",
+      "Estimadores de policy gradient pueden tener alta varianza.",
+      "Q-learning puede sufrir inestabilidad con aproximación funcional y bootstrapping."
+    ],
+    "checklist": [
+      {
+        "label": "Distingue optimización directa de política y aprendizaje de Q",
+        "weight": 2
+      },
+      {
+        "label": "Discute acciones continuas",
+        "weight": 1
+      },
+      {
+        "label": "Analiza sesgo-varianza",
+        "weight": 2
+      },
+      {
+        "label": "Menciona bootstrapping e inestabilidad",
+        "weight": 1
+      },
+      {
+        "label": "Incluye implicaciones prácticas",
+        "weight": 1
+      }
+    ],
+    "rubric": {
+      "5": "Comparación profunda con teoría y consecuencias prácticas.",
+      "4": "Buena comparación con alguna omisión menor.",
+      "3": "Comparación correcta pero superficial.",
+      "2": "Conoce ambos métodos pero no compara bien.",
+      "1": "Menciona términos sin estructura.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "policy gradient",
+      "q-learning",
+      "rl",
+      "bias variance"
+    ]
+  },
+  {
+    "id": "gen-001",
+    "topic": "Generalization",
+    "difficulty": 9,
+    "type": "essay",
+    "question": "Discute por qué la sobreparametrización en redes profundas no implica necesariamente mala generalización.",
+    "expected_answer": [
+      "La teoría clásica de capacidad no explica completamente el comportamiento de redes modernas.",
+      "La optimización implícita introduce sesgos hacia soluciones particulares.",
+      "La geometría del landscape puede favorecer mínimos planos o regiones conectadas.",
+      "La regularización explícita e implícita afecta la solución final.",
+      "Fenómenos como double descent muestran que la relación capacidad-generalización no es monótona."
+    ],
+    "checklist": [
+      {
+        "label": "Contrasta teoría clásica y redes modernas",
+        "weight": 1
+      },
+      {
+        "label": "Menciona sesgo implícito de optimización",
+        "weight": 2
+      },
+      {
+        "label": "Discute mínimos planos o geometría del landscape",
+        "weight": 1
+      },
+      {
+        "label": "Incluye regularización explícita e implícita",
+        "weight": 1
+      },
+      {
+        "label": "Menciona double descent o fenómeno relacionado",
+        "weight": 2
+      }
+    ],
+    "rubric": {
+      "5": "Ensayo sólido con teoría, fenómenos empíricos y matices.",
+      "4": "Muy buena respuesta con alguna conexión ausente.",
+      "3": "Correcta pero general.",
+      "2": "Respuesta parcial y poco matizada.",
+      "1": "Repite ideas comunes sin explicación.",
+      "0": "Respuesta incorrecta o vacía."
+    },
+    "tags": [
+      "generalization",
+      "overparameterization",
+      "double descent",
+      "implicit bias"
+    ]
+  }
+]
